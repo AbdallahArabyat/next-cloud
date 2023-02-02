@@ -1,0 +1,36 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nextcloud-service
+spec: 
+  selector:
+    app: nextcloud                         # < reference to the deployment (connects service with the deployment)                                                      
+  ports:
+    - name: https-80
+      protocol: TCP
+      port: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: postgres-service # < name of the service
+spec: 
+  selector:
+    app: postgres  
+  ports:
+    - name: https-443
+      protocol: TCP
+      port: 80
+      targetPort: 5432
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: redis-service
+spec: 
+  selector:
+    app: redis
+  ports:
+    - name: https-6379
+      protocol: TCP
+      port: 6379
